@@ -1,25 +1,22 @@
 package com.example.shoppinglist.ui.shoppingList
 
 import android.os.Bundle
+import android.widget.ImageButton
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.R
-import com.example.shoppinglist.data.db.ShoppingDatabase
 import com.example.shoppinglist.data.db.entities.ShoppingItem
-import com.example.shoppinglist.data.repository.ShoppingRepository
 import com.example.shoppinglist.databinding.ActivityShoppingBinding
 import com.example.shoppinglist.other.ShoppingItemAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 
 class ShoppingActivity : AppCompatActivity(), KodeinAware {
     override val kodein by kodein()
@@ -28,6 +25,7 @@ class ShoppingActivity : AppCompatActivity(), KodeinAware {
     private val viewModel: SplashScreenVM by viewModels()
 
     private lateinit var binding: ActivityShoppingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen().apply {
@@ -53,7 +51,7 @@ class ShoppingActivity : AppCompatActivity(), KodeinAware {
             adapter.notifyDataSetChanged()
         })
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener{
+        findViewById<ImageButton>(R.id.fab).setOnClickListener{
             AddShoppingItemDialog(this,
             object: AddDialogListener{
                 override fun onAddButtonClick(item: ShoppingItem) {

@@ -1,6 +1,5 @@
 package com.example.shoppinglist.ui.shoppingList
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
@@ -8,7 +7,7 @@ import androidx.appcompat.app.AppCompatDialog
 import com.example.shoppinglist.R
 import com.example.shoppinglist.data.db.entities.ShoppingItem
 
-class AddShoppingItemDialog(context: Context, var addDialogListener: AddDialogListener): AppCompatDialog(context) {
+class AddShoppingItemDialog(context: ShoppingActivity, var addDialogListener: AddDialogListener): AppCompatDialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

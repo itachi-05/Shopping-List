@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.R
 import com.example.shoppinglist.data.db.entities.ShoppingItem
@@ -24,6 +25,9 @@ class ShoppingItemAdapter(
         val currentShoppingItem = items[position]
         holder.tvName.text = currentShoppingItem.name
         holder.tvAmount.text = currentShoppingItem.amount.toString()
+        holder.tvName.setOnClickListener {
+
+        }
         holder.ivDelete.setOnClickListener{
             viewModel.delete(currentShoppingItem)
         }
@@ -32,12 +36,13 @@ class ShoppingItemAdapter(
             viewModel.upsert(currentShoppingItem)
         }
         holder.ivMinus.setOnClickListener{
+            if(currentShoppingItem.amount==1){
+                viewModel.delete(currentShoppingItem)
+                return@setOnClickListener
+            }
             if(currentShoppingItem.amount>0){
                 currentShoppingItem.amount--
                 viewModel.upsert(currentShoppingItem)
-            }
-            if(currentShoppingItem.amount==1){
-                viewModel.delete(currentShoppingItem)
             }
         }
     }
